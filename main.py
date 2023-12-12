@@ -1,9 +1,6 @@
 import os
-import sys
 import datetime
 import json
-import time
-from distutils.spawn import find_executable
 
 
 banner = """
@@ -29,6 +26,7 @@ options_menu = """
         [3] Delete a Diary Entry
 """
 
+file_extensions = "txt"
 
 def getInfosFromConfig(getInfo):
     f = open("config.json", "r")
@@ -118,12 +116,12 @@ def newEntry():
         entryNum += 1
     if entryNum == 10:
         os.mkdir(f"entrys/site{siteNum + 1}")
-    with open(f"entrys/site{siteNum}/Entry_{entryNum}.txt", "w") as f:
+    with open(f"entrys/site{siteNum}/Entry_{entryNum}.{file_extensions}", "w") as f:
         birthday = ""
         if getInfosFromConfig("birthday") == todayFormatted:
             birthday = "Happy Birthday!"
         f.write(f"{todayFormatted}\n{getInfosFromConfig('name')}\n------------------\n{birthday}\n")
-    os.system(f"notepad entrys/site{siteNum}/Entry_{entryNum}.txt")
+    os.system(f"notepad entrys/site{siteNum}/Entry_{entryNum}.{file_extensions}")
 
 
 def editEntry():
@@ -133,7 +131,7 @@ def editEntry():
     entry = getEntry()
     siteNum = entry["site"]
     entryNum = entry["entry"]
-    os.system(f"notepad entrys/site{siteNum}/Entry_{entryNum}.txt")
+    os.system(f"notepad entrys/site{siteNum}/Entry_{entryNum}.{file_extensions}")
 
 
 def deleteEntry():
@@ -143,7 +141,7 @@ def deleteEntry():
     entry = getEntry()
     siteNum = entry["site"]
     entryNum = entry["entry"]
-    os.system(f"del entrys/site{siteNum}/Entry_{entryNum}.txt")
+    os.system(f"del entrys/site{siteNum}/Entry_{entryNum}.{file_extensions}")
 
 
 def firstEntry():
