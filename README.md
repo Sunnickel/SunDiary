@@ -13,7 +13,7 @@
 ```
 
 ## Overview 
-A dairy written with Python 3
+A dairy written with Python 3 for CLI
 
 ## Resources
  * Windows Editor
